@@ -9,5 +9,10 @@ function computerPlay() {
   return ["Rock", "Paper", "Scissors"][randomIntegerBetween0and2]
 }
 //creer un message d erreur si l user fait un choix autre que rock paper scissors
-
+class ValueError extends Error {
+  constructor(badValue) {
+    super(`Error: bad value "${badValue}". You should only enter "Rock", "Paper" or "Scissors"`);
+    this.name = "ValueError";
+  }
+}
 // prendre les 2 string player et computer et dire qui gagne
