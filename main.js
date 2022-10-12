@@ -1,53 +1,53 @@
-// Prendre un integer random inclus entre 0 et 2 => choix du computer
+// define random integer between 0 ans 2 and define as computer choice
 function getRandomInteger(max) {
   return Math.floor(Math.random() * (max +1));
 
 }
-//convertir cet integer en string entre rock(0) paper (1) scissors (2)
+//convert integer on string for rock(0) paper (1) scissors (2)
 function computerPlay() {
   const randomIntegerBetween0and2 = getRandomInteger(2)
   return ["rock", "paper", "scissors"][randomIntegerBetween0and2]
 }
-//creer un message d erreur si l user fait un choix autre que rock paper scissors
+//error message if user dont type rock paper scissors
 class ValueError extends Error {
   constructor(badValue) {
     super(`Error: bad value "${badValue}". You should only enter "rock", "paper" or "scissors"`);
     this.name = "ValueError";
   }
 }
-// prendre les 2 string player et computer, convertir en lowercase
+// take 2 string player and computer, convert in lowercase
 function playRound(playerSelection, computerSelection) {
   try {
     const lowerCasePlayerSelection = playerSelection.toLowerCase()
     const lowerCaseComputerSelection = computerSelection.toLowerCase()
 
-// definir les messages de victoire
+// define results messages
     const victoryMessage = `You won! ${playerSelection} beats ${computerSelection}!`
     const defeatMessage = `You loose! ${computerSelection} beats ${playerSelection}!`
     const equalityMessage = `Equality! ${playerSelection} can't beat another ${playerSelection}!`
 
-//definir les regles du jeu pour "rock"
+//rules for user "rock"
     if (lowerCasePlayerSelection === "rock") {
       if (lowerCaseComputerSelection === "rock") return equalityMessage
       if (lowerCaseComputerSelection === "paper") return defeatMessage
       if (lowerCaseComputerSelection === "scissors") return victoryMessage
       throw new ValueError(computerSelection)
     }
-//definir les regles du jeu pour "paper"
+//rules for user "paper"
     if (lowerCasePlayerSelection === "paper") {
       if (lowerCaseComputerSelection === "rock") return victoryMessage
       if (lowerCaseComputerSelection === "paper") return equalityMessage
       if (lowerCaseComputerSelection === "scissors") return defeatMessage
       throw new ValueError(computerSelection)
     }
-//definir les regles du jeu pour "scissors"
+//rules for user "scissors"
     if (lowerCasePlayerSelection === "scissors") {
       if (lowerCaseComputerSelection === "rock") return defeatMessage
       if (lowerCaseComputerSelection === "paper") return victoryMessage
       if (lowerCaseComputerSelection === "scissors") return equalityMessage
       throw new ValueError(computerSelection)
     }
-// definir retour message d'erreur
+// return errror message
     throw new ValueError(playerSelection)
   } catch (error) {
     if (error instanceof ValueError) return error.message
@@ -55,7 +55,7 @@ function playRound(playerSelection, computerSelection) {
     throw error
   }
 }
-//Lanceur de partie
+//launcher
 function game() {
   for (let i = 0; i < 5; i++) {
     const playerSelection = prompt("rock, paper or scissors?")
